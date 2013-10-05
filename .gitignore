@@ -1,0 +1,9 @@
+*~
+*.omc
+*.cmi
+*.cmx
+*.cmo
+*.o
+/.omakedb
+/.omakedb.lock
+*.cnf

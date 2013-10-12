@@ -26,7 +26,7 @@ SRC_DIR = .
 
 USE_OCAMLFIND = true
 OCAMLPACKS[] =
-OCAMLFLAGS    += -thread -g
+OCAMLFLAGS    += -thread -annot
 OCAMLCFLAGS   +=
 OCAMLOPTFLAGS +=
 OCAML_LINK_FLAGS +=
@@ -55,7 +55,8 @@ OCamlLibrary($(LIB), $(FILES))
 
 
 clean:
-  rm -rf *.cmx *.cmxa *.cmo *.cmi *.o *.a *.out *~
-  rm $(PROGRAM) $(PROGRAM).opt
+  rm -rf *.cmx *.cmxa *.cmo *.cmi *.o *.a *.annot *.out *~
+  rm $(PROGRAM)
+  rm $(PROGRAM).opt
   rm lexer.ml
   rm parser.mli parser.ml

@@ -26,7 +26,7 @@ if $(equal $(OSTYPE), Win32)
     export
 else
     CC = gcc
-    CFLAGS += -g
+    CFLAGS +=
     export
 
 BYTE_ENABLED   = $(not $(OCAMLOPT_EXISTS))

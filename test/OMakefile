@@ -27,7 +27,7 @@ SRC_DIR = .
 USE_OCAMLFIND = true
 OCAMLPACKS[] =
   oUnit
-OCAMLFLAGS    += -thread -g
+OCAMLFLAGS    += -thread -g -annot
 OCAMLCFLAGS   +=
 OCAMLOPTFLAGS +=
 OCAML_LINK_FLAGS +=
@@ -55,5 +55,6 @@ check: build
        ./$(PROGRAM)
 
 clean:
-  rm -rf *.cmx *.cmo *.cmi *.o *.out *~
-  rm $(PROGRAM) $(PROGRAM).opt
+  rm -rf *.cmx *.cmo *.cmi *.o *.out *~ *.annot
+  rm $(PROGRAM)
+  rm $(PROGRAM).opt

@@ -4,6 +4,8 @@
 *.cmx
 *.cmo
 *.o
+*.annot
+
 /.omakedb
 /.omakedb.lock
 *.cnf

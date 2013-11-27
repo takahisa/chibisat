@@ -58,6 +58,19 @@ let make () = {
   root_level	= 0
 }
 
+let reset solver = 
+  V.clear solver.watches;
+  V.clear solver.constrs;
+  V.clear solver.learnts;
+  M.clear solver.reason;
+  V.clear solver.vars;
+  V.clear solver.assigns;
+  Q.clear solver.props;
+  V.clear solver.trail;
+  V.clear solver.trail_lim;
+  V.clear solver.level;
+  solver.root_level <- 0
+
 let decision_level solver =
   V.size solver.trail_lim
 

@@ -21,7 +21,7 @@
 # 
 
 PROGRAM = chibisat
-LIB = libchibisat
+LIB = chibisat
 SRC_DIR = .
 
 USE_OCAMLFIND = true
@@ -55,8 +55,9 @@ OCamlLibrary($(LIB), $(FILES))
 
 
 clean:
-  rm -rf *.cmx *.cmxa *.cmo *.cmi *.o *.a *.annot *.out *~
-  rm $(PROGRAM)
-  rm $(PROGRAM).opt
-  rm lexer.ml
-  rm parser.mli parser.ml
+  rm -rf *.cmx *.cmxa *.cmo *.cmi *.o *.cma *.a *.run *.annot *.out *~
+  rm -f $(PROGRAM)
+  rm -f $(PROGRAM).opt
+  rm -f lexer.ml
+  rm -f parser.mli parser.ml
+

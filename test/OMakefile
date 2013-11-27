@@ -40,7 +40,7 @@ if $(not $(OCAMLFIND_EXISTS))
 
 FILES[] = $(removesuffix $(filter %.ml, $(ls R, $(SRC_DIR))))
 
-OCAML_LIBS += ../src/libchibisat
+OCAML_LIBS += ../src/chibisat
 OCAML_CLIBS +=
 OCAML_OTHER_LIBS +=
 OCAML_LIB_FLAGS +=
@@ -55,6 +55,6 @@ check: build
        ./$(PROGRAM)
 
 clean:
-  rm -rf *.cmx *.cmo *.cmi *.o *.out *~ *.annot
-  rm $(PROGRAM)
-  rm $(PROGRAM).opt
+  rm -rf *.cmx *.cmxa *.cmo *.cmi *.a *.o *.out *.run *~ *.annot
+  rm -f $(PROGRAM)
+  rm -f $(PROGRAM).opt

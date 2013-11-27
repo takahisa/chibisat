@@ -29,7 +29,7 @@ else
     CFLAGS +=
     export
 
-BYTE_ENABLED   = $(not $(OCAMLOPT_EXISTS))
+BYTE_ENABLED   = true
 NATIVE_ENABLED = $(OCAMLOPT_EXISTS)
 
 .PHONY: build install clean

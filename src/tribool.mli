@@ -22,7 +22,7 @@
  *)
 type t = T | F | Undef
 
-val neg		: t -> t
-val to_bool	: t -> bool
-val of_bool	: bool -> t
-val show	: t -> string
+val neg     : t -> t
+val to_bool : t -> bool
+val of_bool : bool -> t
+val show    : t -> string

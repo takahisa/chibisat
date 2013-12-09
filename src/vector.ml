@@ -51,9 +51,9 @@ module Poly = struct
       
   let of_list elts =
     let size = List.length elts in
-    { elts	= Array.of_list elts;
-      size	= size;
-      capacity	= size }
+    { elts     = Array.of_list elts;
+      size     = size;
+      capacity = size }
       
   let to_list vec =
     Array.to_list (Array.sub vec.elts 0 vec.size)
@@ -95,11 +95,11 @@ module Poly = struct
   let find f vec =
     let rec loop i n =
       if i >= n then
-	None
+    None
       else if f (nth i vec) then
-	Some i
+    Some i
       else
-	loop (i + 1) n
+    loop (i + 1) n
     in
     loop 0 vec.size
 
@@ -133,18 +133,18 @@ module Poly = struct
   let fold_left f vec seed =
     let rec loop i acc =
       if i >= vec.size then
-	acc
+    acc
       else
-	loop (i + 1) (f acc (nth i vec))
+    loop (i + 1) (f acc (nth i vec))
     in
     loop 0 seed
 
   let fold_right f vec seed =
     let rec loop i acc=
       if i < 0 then
-	acc
+    acc
       else
-	loop (i - 1) (f (nth i vec) acc)
+    loop (i - 1) (f (nth i vec) acc)
     in
     loop (vec.size - 1) seed
 
@@ -158,37 +158,37 @@ module type Elt = sig
 end
 
 module Make (E : Elt) = struct
-  type elt		= E.t
-  type t		= E.t Poly.t
-  let empty		= Poly.empty
-  let make		= Poly.make
-  let size		= Poly.size
-  let copy		= Poly.copy
-  let clear		= Poly.clear
-  let of_list		= Poly.of_list
-  let to_list		= Poly.to_list
-  let nth		= Poly.nth
-  let update		= Poly.update
-  let head		= Poly.head
-  let last		= Poly.last
-  let push		= Poly.push
-  let pop		= Poly.pop
-  let find		= Poly.find
-  let exist		= Poly.exist
-  let iteri		= Poly.iteri
-  let iter		= Poly.iter
-  let remove_at		= Poly.remove_at
-  let remove		= Poly.remove
-  let fold_left		= Poly.fold_left
-  let fold_right	= Poly.fold_right
-  let sequential_equal  = Poly.sequential_equal
+  type elt             = E.t
+  type t               = E.t Poly.t
+  let empty            = Poly.empty
+  let make             = Poly.make
+  let size             = Poly.size
+  let copy             = Poly.copy
+  let clear            = Poly.clear
+  let of_list          = Poly.of_list
+  let to_list          = Poly.to_list
+  let nth              = Poly.nth
+  let update           = Poly.update
+  let head             = Poly.head
+  let last             = Poly.last
+  let push             = Poly.push
+  let pop              = Poly.pop
+  let find             = Poly.find
+  let exist            = Poly.exist
+  let iteri            = Poly.iteri
+  let iter             = Poly.iter
+  let remove_at        = Poly.remove_at
+  let remove           = Poly.remove
+  let fold_left        = Poly.fold_left
+  let fold_right       = Poly.fold_right
+  let sequential_equal = Poly.sequential_equal
 end
 
 module Slice = struct
   type 'a t = {
-    vector	: 'a Poly.t;
-    i		: int;
-    n		: int
+    vector  : 'a Poly.t;
+    i       : int;
+    n       : int
   }
   
   let make i n vector =
@@ -204,28 +204,28 @@ module Slice = struct
   let find f slice =
     let rec loop i n =
       if i >= n then
-	None
+    None
       else if f (nth i slice) then
-	Some i
+    Some i
       else
-	loop (i + 1) n
+    loop (i + 1) n
     in
     loop 0 slice.n
       
   let exist f slice =
     let rec loop i n =
       if i >= n then
-	false
+    false
       else if f (nth i slice) then
-	true
+    true
       else
-	loop (i + 1) n
+    loop (i + 1) n
     in
     loop 0 slice.n
       
   let iteri f slice =
     for i = 0 to slice.n - 1do
-	f i (nth i slice)
+    f i (nth i slice)
     done
       
   let iter f slice =

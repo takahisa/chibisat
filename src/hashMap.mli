@@ -23,20 +23,20 @@
 
 module Poly : sig
   type ('k, 'v) t
-  val empty	: unit -> ('k, 'v) t
-  val make	: int -> ('k, 'v) t
-  val length	: ('k, 'v) t -> int
-  val clear	: ('k, 'v) t -> unit
-  val copy	: ('k, 'v) t -> ('k, 'v) t
-  val add	: 'k -> 'v -> ('k, 'v) t -> unit
-  val get	: 'k -> ('k, 'v) t -> 'v
-  val set	: 'k -> 'v -> ('k, 'v) t -> unit
-  val erase	: 'k -> ('k, 'v) t -> unit
-  val find	: 'k -> ('k, 'v) t -> 'v option
-  val find_all	: 'k -> ('k, 'v) t -> 'v list
-  val exist	: 'k -> ('k, 'v) t -> bool
-  val iter	: ('k -> 'v -> unit) -> ('k, 'v) t -> unit
-  val fold	: ('k -> 'v -> 'a -> 'a) -> ('k, 'v) t -> 'a -> 'a
+  val empty    : unit -> ('k, 'v) t
+  val make     : int -> ('k, 'v) t
+  val length   : ('k, 'v) t -> int
+  val clear    : ('k, 'v) t -> unit
+  val copy     : ('k, 'v) t -> ('k, 'v) t
+  val add      : 'k -> 'v -> ('k, 'v) t -> unit
+  val get      : 'k -> ('k, 'v) t -> 'v
+  val set      : 'k -> 'v -> ('k, 'v) t -> unit
+  val erase    : 'k -> ('k, 'v) t -> unit
+  val find     : 'k -> ('k, 'v) t -> 'v option
+  val find_all : 'k -> ('k, 'v) t -> 'v list
+  val exist    : 'k -> ('k, 'v) t -> bool
+  val iter     : ('k -> 'v -> unit) -> ('k, 'v) t -> unit
+  val fold     : ('k -> 'v -> 'a -> 'a) -> ('k, 'v) t -> 'a -> 'a
 end
 
 module type Elt = sig 
@@ -48,20 +48,20 @@ module Make : functor (E : Elt) -> sig
   type k = E.k
   type v = E.v
   type t = (k, v) Poly.t
-  val empty	: unit -> t
-  val make	: int -> t
-  val length	: t -> int
-  val clear	: t -> unit
-  val copy	: t -> t
-  val add	: k -> v -> t -> unit
-  val get	: k -> t -> v
-  val set	: k -> v -> t -> unit
-  val erase	: k -> t -> unit
-  val find	: k -> t -> v option
-  val find_all	: k -> t -> v list
-  val exist	: k -> t -> bool
-  val iter	: (k -> v -> unit) -> t -> unit
-  val fold	: (k -> v -> 'a -> 'a) -> t -> 'a -> 'a
+  val empty    : unit -> t
+  val make     : int -> t
+  val length   : t -> int
+  val clear    : t -> unit
+  val copy     : t -> t
+  val add      : k -> v -> t -> unit
+  val get      : k -> t -> v
+  val set      : k -> v -> t -> unit
+  val erase    : k -> t -> unit
+  val find     : k -> t -> v option
+  val find_all : k -> t -> v list
+  val exist    : k -> t -> bool
+  val iter     : (k -> v -> unit) -> t -> unit
+  val fold     : (k -> v -> 'a -> 'a) -> t -> 'a -> 'a
 end
 
 type ('k, 'v) t = ('k, 'v) Poly.t

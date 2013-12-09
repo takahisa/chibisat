@@ -21,8 +21,8 @@
  * THE SOFTWARE.
  *)
 type t = {
-  id		: VarId.t;
-  activity	: float
+  id        : VarId.t;
+  activity  : float
 }
 
 let make id =

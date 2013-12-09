@@ -38,7 +38,7 @@ let make_test =
       let target = make n init in
       assert_equal n (size target);
       for i = 0 to n - 1 do
-	assert_equal init (nth i target)
+    assert_equal init (nth i target)
       done
   end 
 
@@ -60,7 +60,7 @@ let copy_test =
       let target = copy original in
       assert_equal (size original) (size target);
       for i = 0 to n - 1 do
-	assert_equal (nth i original) (nth i target)
+    assert_equal (nth i original) (nth i target)
       done;
       update 0 (init + 1) original;
       assert_equal true (target <> original)
@@ -83,7 +83,7 @@ let of_list_test =
       let target = of_list source in
       assert_equal (List.length source) (size target);
       for i = 0 to size target - 1 do
-	assert_equal (List.nth source i) (nth i target)
+    assert_equal (List.nth source i) (nth i target)
       done
   end
 
@@ -101,7 +101,7 @@ let nth_test =
       let expect = [1; 2; 3] in
       let target = of_list expect in
       for i = 0 to List.length expect - 1 do
-	assert_equal (List.nth expect i) (nth i target)
+    assert_equal (List.nth expect i) (nth i target)
       done
   end
 

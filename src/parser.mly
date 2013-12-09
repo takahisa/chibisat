@@ -46,7 +46,7 @@ conjunction:
 disjunction:
 | LIT disjunction
     { if $1 >= 0 then
-	Lit.make_t (abs $1 - 1) :: $2 
+        Lit.make_t (abs $1 - 1) :: $2 
       else
         Lit.make_f (abs $1 - 1) :: $2 }
 | EOC

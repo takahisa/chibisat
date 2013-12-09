@@ -25,8 +25,8 @@ exception No_value of string
 
 type 'a t = 'a option
 
-val is_some	: 'a option -> bool
-val is_none	: 'a option -> bool
-val get		: 'a option -> 'a
-val map		: ('a -> 'b) -> 'a option -> 'b option
-val iter	: ('a -> unit) -> 'a option -> unit
+val is_some : 'a option -> bool
+val is_none : 'a option -> bool
+val get     : 'a option -> 'a
+val map     : ('a -> 'b) -> 'a option -> 'b option
+val iter    : ('a -> unit) -> 'a option -> unit

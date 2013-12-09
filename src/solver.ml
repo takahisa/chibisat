@@ -31,31 +31,31 @@ module Q = Queue
 module M = HashMap
 
 type t = {
-  mutable watches	: Constr.t Vector.t Vector.t;
-  mutable constrs	: Constr.t Vector.t;
-  mutable learnts	: Clause.t Vector.t;
-  mutable reason	: (VarId.t, Constr.t) HashMap.t;
-  mutable vars		: Var.t Vector.t;
-  mutable assigns	: Tribool.t Vector.t;
-  mutable props		: Lit.t Queue.t;
-  mutable trail		: Lit.t Vector.t;
-  mutable trail_lim	: int Vector.t;
-  mutable level		: int Vector.t;
-  mutable root_level	: int;
+  mutable watches    : Constr.t Vector.t Vector.t;
+  mutable constrs    : Constr.t Vector.t;
+  mutable learnts    : Clause.t Vector.t;
+  mutable reason     : (VarId.t, Constr.t) HashMap.t;
+  mutable vars       : Var.t Vector.t;
+  mutable assigns    : Tribool.t Vector.t;
+  mutable props      : Lit.t Queue.t;
+  mutable trail      : Lit.t Vector.t;
+  mutable trail_lim  : int Vector.t;
+  mutable level      : int Vector.t;
+  mutable root_level : int;
 }
 
 let make () = {
-  watches	= V.empty ();
-  constrs	= V.empty ();
-  learnts	= V.empty ();
-  reason	= M.empty ();
-  vars		= V.empty ();
-  assigns	= V.empty ();
-  props		= Q.create ();
-  trail		= V.empty ();
-  trail_lim	= V.empty ();
-  level		= V.empty ();
-  root_level	= 0
+  watches    = V.empty ();
+  constrs    = V.empty ();
+  learnts    = V.empty ();
+  reason     = M.empty ();
+  vars       = V.empty ();
+  assigns    = V.empty ();
+  props      = Q.create ();
+  trail      = V.empty ();
+  trail_lim  = V.empty ();
+  level      = V.empty ();
+  root_level = 0
 }
 
 let reset solver = 
@@ -108,7 +108,7 @@ let model solver =
   V.fold_right (fun v xs -> (Tribool.to_bool v)::xs) solver.assigns []
 
 let watch_list lit solver =
-    V.nth (lit_index lit) solver.watches
+  V.nth (lit_index lit) solver.watches
 
 let prop_enqueue lit solver =
   match lit_value lit solver with
@@ -119,8 +119,8 @@ let prop_enqueue lit solver =
     let value = Lit.Sign.to_tribool (Lit.sign lit) in
     begin V.update index value solver.assigns;
           V.update index (decision_level solver) solver.level;
-	  Q.push lit solver.props;
-	  V.push lit solver.trail end
+          Q.push lit solver.props;
+          V.push lit solver.trail end
 
 let prop_enqueue_with lit reason solver =
   match lit_value lit solver with
@@ -131,8 +131,8 @@ let prop_enqueue_with lit reason solver =
     let value = Lit.Sign.to_tribool (Lit.sign lit) in
     begin V.update index value solver.assigns;
           V.update index (decision_level solver) solver.level;
-	  Q.push lit solver.props;
-	  V.push lit solver.trail;
+          Q.push lit solver.props;
+          V.push lit solver.trail;
           M.add index reason solver.reason end
 
 let constr_is_tautology constr =
@@ -164,8 +164,8 @@ let constr_simplify constr solver =
       begin match S.find ((=) elt) slice with
             | None   -> loop (i + 1) n
             | Some i -> 
-	      begin remove_at i constr;
-		    loop i (n - 1) end end;
+              begin remove_at i constr;
+                    loop i (n - 1) end end;
   in
   loop 0 (size constr)
 
@@ -180,14 +180,14 @@ let constr_propagate prop constr solver =
   else
     let rec loop i n =
       if i >= n then
-	begin V.push constr (watch_list prop solver);
-	      prop_enqueue_with (nth 0 constr) constr solver end
+        begin V.push constr (watch_list prop solver);
+              prop_enqueue_with (nth 0 constr) constr solver end
       else if lit_value (nth i constr) solver = Tribool.F then
-	loop (i + 1) n
+        loop (i + 1) n
       else
-	begin update 1 (nth i constr) constr;
+        begin update 1 (nth i constr) constr;
               update i (Lit.neg prop) constr;
-	      V.push constr (watch_list (Lit.neg (nth 1 constr)) solver) end
+              V.push constr (watch_list (Lit.neg (nth 1 constr)) solver) end
     in
     loop 2 (size constr)
 
@@ -202,9 +202,9 @@ let find_level_highest constr solver =
       let lit = nth i constr in
       let level = lit_level lit solver in
       if level > level_max then 
-	loop (i + 1) i n level
+        loop (i + 1) i n level
       else 
-	loop (i + 1) j n level_max 
+        loop (i + 1) j n level_max 
   in
   loop 0 (-1) (size constr) (-1)
 
@@ -238,11 +238,11 @@ let cancel_until level solver =
 let new_var solver =
   let v = Var.make (nvars solver) in
   begin V.push (V.empty ()) solver.watches;
-        V.push (V.empty ()) solver.watches;
-        V.push v solver.vars;
-        V.push Tribool.Undef solver.assigns;
-	V.push (-1) solver.level;
-        v end
+    V.push (V.empty ()) solver.watches;
+    V.push v solver.vars;
+    V.push Tribool.Undef solver.assigns;
+    V.push (-1) solver.level;
+    v end
 
 let new_learnt lits solver =
   let open Constr in
@@ -258,11 +258,11 @@ let new_learnt lits solver =
     begin update 1 (List.nth lits i) constr;
           update i (List.nth lits 1) constr;
           V.push constr (watch_list (Lit.neg (nth 0 constr)) solver);
-	  V.push constr (watch_list (Lit.neg (nth 1 constr)) solver);
-	  V.push constr solver.constrs;
-	  V.push clause solver.learnts;
-	  prop_enqueue_with (nth 0 constr) constr solver;
-	  clause end
+          V.push constr (watch_list (Lit.neg (nth 1 constr)) solver);
+          V.push constr solver.constrs;
+          V.push clause solver.learnts;
+          prop_enqueue_with (nth 0 constr) constr solver;
+          clause end
 
 let new_clause lits solver =
   let open Constr in
@@ -273,15 +273,15 @@ let new_clause lits solver =
   else
     begin constr_simplify constr solver;
           match size constr with
-	  | 0 -> raise UnSAT
-	  | 1 -> 
-	    begin prop_enqueue (nth 0 constr) solver;
-	          clause end
-	  | _ ->
-	    begin V.push constr (watch_list (Lit.neg (nth 0 constr)) solver);
-	          V.push constr (watch_list (Lit.neg (nth 1 constr)) solver);
-		  V.push constr solver.constrs;
-		  clause end end
+          | 0 -> raise UnSAT
+          | 1 -> 
+            begin prop_enqueue (nth 0 constr) solver;
+                  clause end
+          | _ ->
+            begin V.push constr (watch_list (Lit.neg (nth 0 constr)) solver);
+                  V.push constr (watch_list (Lit.neg (nth 1 constr)) solver);
+                  V.push constr solver.constrs;
+                  clause end end
 
 let propagate solver =
   while not (Q.is_empty solver.props) do
@@ -292,10 +292,10 @@ let propagate solver =
     for i = 0 to V.size tmp - 1 do
       try constr_propagate prop (V.nth i tmp) solver
       with e ->
-	for j = i + 1 to V.size tmp -1 do
-	  V.push (V.nth j tmp) watching
-	done;
-	raise e
+        for j = i + 1 to V.size tmp -1 do
+          V.push (V.nth j tmp) watching
+        done;
+        raise e
     done
   done
 
@@ -322,17 +322,17 @@ let analyze_conflict confl solver =
       let p = nth i r in
       let d = lit_level p solver in
       if not (V.nth (Lit.id p) seen) && d > 0 then
-	begin V.update (Lit.id p) true seen;
-	      if d = decision_level solver then
-		counter := !counter + 1
-	      else
-		begin learnt := p :: !learnt;
-		      level  := max d !level end end
+        begin V.update (Lit.id p) true seen;
+              if d = decision_level solver then
+                counter := !counter + 1
+              else
+                begin learnt := p :: !learnt;
+                      level  := max d !level end end
     done;
     let p =
       let rec loop i =
-	let lit = V.nth i solver.trail in
-	if V.nth (Lit.id lit) seen then V.nth i solver.trail else loop (i - 1)
+        let lit = V.nth i solver.trail in
+        if V.nth (Lit.id lit) seen then V.nth i solver.trail else loop (i - 1)
       in 
       loop (V.size solver.trail - 1) in
     let r = reason p solver in
@@ -342,7 +342,7 @@ let analyze_conflict confl solver =
       loop 1 (Option.get r)
     else
       begin learnt := Lit.neg p :: !learnt;
-	    (!learnt, !level) end
+            (!learnt, !level) end
   in
   loop 0 confl
 
@@ -352,17 +352,17 @@ let search solver =
       propagate solver;
 
       if model_found solver then
-	raise (SAT (model solver));
+        raise (SAT (model solver));
 
       let lit = Lit.make_t (select_var solver) in
       assume lit solver;
     with
       Conflict k ->
-	if decision_level solver = solver.root_level then
-	  raise UnSAT;
-	let (lits, d) = analyze_conflict k solver in
-	cancel_until (max d solver.root_level) solver;
-	ignore (new_learnt lits solver)
+        if decision_level solver = solver.root_level then
+          raise UnSAT;
+        let (lits, d) = analyze_conflict k solver in
+        cancel_until (max d solver.root_level) solver;
+        ignore (new_learnt lits solver)
   done
 
 let solve assumps solver =

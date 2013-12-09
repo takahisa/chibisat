@@ -76,9 +76,9 @@ let () =
           exit 1 end;
   let channel = open_in !filepath in
    
-try
-  let (nvars, nclauses, clauses) = Parser.dimacs Lexer.token (Lexing.from_channel channel) in
-  ignore (solve [] nvars nclauses clauses);
-  close_in channel
+  try
+    let (nvars, nclauses, clauses) = Parser.dimacs Lexer.token (Lexing.from_channel channel) in
+    ignore (solve [] nvars nclauses clauses);
+    close_in channel
   with
     e -> close_in channel; raise e

@@ -21,4 +21,3 @@
  * THE SOFTWARE.
  *)
 include module type of Vector.Make (Lit)
-

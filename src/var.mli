@@ -21,11 +21,11 @@
  * THE SOFTWARE.
  *)
 type t = { 
-  id		: VarId.t; 
-  activity	: float; 
+  id        : VarId.t; 
+  activity  : float; 
 }
 
-val make	: VarId.t -> t
-val id		: t -> VarId.t
-val activity	: t -> float
-val show	: t -> string
+val make     : VarId.t -> t
+val id       : t -> VarId.t
+val activity : t -> float
+val show     : t -> string

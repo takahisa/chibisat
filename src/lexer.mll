@@ -21,10 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  *)
-  open Parser
+open Parser
 }
 
-let digit = ['0'-'9']
+let digit   = ['0'-'9']
 let newline = ['\r' '\n']
 let space   = [' ' '\t']
 
@@ -37,16 +37,15 @@ rule token = parse
    | eof                              { EOF }
    | c                                { comment lexbuf; token lexbuf }
    | p                                { let lexeme = Lexing.lexeme lexbuf in
-			                Scanf.sscanf lexeme "p cnf %d %d"
-			                  (fun nvars nclauses -> DIMACS(nvars, nclauses)) }
+                                        Scanf.sscanf lexeme "p cnf %d %d"
+                                          (fun nvars nclauses -> DIMACS(nvars, nclauses)) }
    | '0'                              { EOC }
    | '-'? ['1'-'9']['0'-'9']*         { let lexeme = Lexing.lexeme lexbuf in
-			                LIT(int_of_string lexeme) }
-   | _                                { failwith
-					  (Printf.sprintf "unexpected token %s detected (%d-%d)"
-					     (Lexing.lexeme lexbuf)
-					     (Lexing.lexeme_start lexbuf)
-					     (Lexing.lexeme_end lexbuf)) }
+                                        LIT(int_of_string lexeme) }
+   | _                                { failwith (Printf.sprintf "unexpected token %s detected (%d-%d)"
+                                                   (Lexing.lexeme lexbuf)
+                                                   (Lexing.lexeme_start lexbuf)
+                                                   (Lexing.lexeme_end lexbuf)) }
 and comment = parse
    | eof                              { () }
    | newline                          { () }

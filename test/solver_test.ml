@@ -35,7 +35,7 @@ let constr_is_tautology_test =
       let v2 = Var.id (new_var solver) in
       let v3 = Var.id (new_var solver) in
       begin let target = C.of_list [(?+v1); (?-v1); (?-v2); (?-v3)] in
-	    assert_equal true (constr_is_tautology target) end
+        assert_equal true (constr_is_tautology target) end
   end
 
 let constr_is_satisfied_test =
@@ -47,10 +47,10 @@ let constr_is_satisfied_test =
       let v3 = Var.id (new_var solver) in
       let constr = Constr.of_list [?-v1; ?-v2; ?-v3] in
       begin let target = constr in
-	    assert_equal false (constr_is_satisfied target solver) end;
+        assert_equal false (constr_is_satisfied target solver) end;
       begin assume (Lit.make_f v1) solver;
-	    let target = constr in
-	    assert_equal true (constr_is_satisfied target solver) end
+        let target = constr in
+        assert_equal true (constr_is_satisfied target solver) end
   end
 
 let constr_simplify_test =
@@ -61,14 +61,14 @@ let constr_simplify_test =
       let v2 = Var.id (new_var solver) in
       let v3 = Var.id (new_var solver) in
       begin let target = C.of_list [?-v1; ?-v1; ?-v2; ?-v3] in
-	    let expect = C.of_list [?-v1; ?-v2; ?-v3] in
-	    constr_simplify target solver;
-	    assert_equal true (C.sequential_equal expect target) end;
+            let expect = C.of_list [?-v1; ?-v2; ?-v3] in
+            constr_simplify target solver;
+            assert_equal true (C.sequential_equal expect target) end;
       begin assume (?+v1) solver;
-	    let target = C.of_list [?-v1; ?-v2; ?-v3] in
-	    let expect = C.of_list [?-v2; ?-v3] in
-	    constr_simplify target solver;
-	    assert_equal true (C.sequential_equal expect target) end
+            let target = C.of_list [?-v1; ?-v2; ?-v3] in
+            let expect = C.of_list [?-v2; ?-v3] in
+            constr_simplify target solver;
+            assert_equal true (C.sequential_equal expect target) end
   end
 
 let find_level_highest_test =
@@ -208,4 +208,3 @@ let _ =
       propagate_test
     ]
   end
-

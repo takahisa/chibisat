@@ -21,11 +21,11 @@
  * THE SOFTWARE.
  *)
 type t = {
-  lits		: Constr.t; 
-  activity	: float; 
+  lits      : Constr.t; 
+  activity  : float; 
 }
 
-val make	: Constr.t -> t
-val lits	: t -> Constr.t
-val activity	: t -> float
-val show	: t -> string
+val make     : Constr.t -> t
+val lits     : t -> Constr.t
+val activity : t -> float
+val show     : t -> string

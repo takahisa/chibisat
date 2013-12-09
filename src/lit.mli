@@ -22,21 +22,21 @@
  *)
 module Sign : sig
   type t = T | F
-  val neg		: t -> t
-  val of_bool		: bool -> t
-  val to_bool		: t -> bool
-  val to_tribool	: t -> Tribool.t
+  val neg        : t -> t
+  val of_bool    : bool -> t
+  val to_bool    : t -> bool
+  val to_tribool : t -> Tribool.t
 end
 
 type t = { 
-  sign	: Sign.t; 
-  id	: VarId.t; 
+  sign  : Sign.t; 
+  id    : VarId.t; 
 }
 
-val make	: Sign.t -> VarId.t -> t
-val make_t	: VarId.t -> t
-val make_f	: VarId.t -> t
-val sign	: t -> Sign.t
-val id		: t -> VarId.t
-val neg		: t -> t
-val show	: t -> string
+val make    : Sign.t -> VarId.t -> t
+val make_t  : VarId.t -> t
+val make_f  : VarId.t -> t
+val sign    : t -> Sign.t
+val id      : t -> VarId.t
+val neg     : t -> t
+val show    : t -> string

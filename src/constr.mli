@@ -24,4 +24,4 @@ type elt = Lit.t
 type t   = LitSet.t
 include module type of LitSet with type elt := LitSet.elt and type t := LitSet.t
 
-val show	: t -> string
+val show : t -> string

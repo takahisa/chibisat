@@ -21,8 +21,8 @@
  * THE SOFTWARE.
  *)
 type t = {
-  lits		: Constr.t;
-  activity	: float
+  lits      : Constr.t;
+  activity  : float
 }
 
 let make lits =
@@ -37,4 +37,3 @@ let activity cls =
 
 let show cls =
   Constr.show (cls.lits)
-

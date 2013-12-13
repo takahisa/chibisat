@@ -365,10 +365,27 @@ let search solver =
         ignore (new_learnt lits solver)
   done
 
+let rec search_dpll solver =
+  propagate solver;
+
+  if model_found solver then
+    raise (SAT (model solver));
+
+  let level = decision_level solver in
+  let lit = Lit.make_f (select_var solver) in
+  try
+    assume lit solver;
+    search_dpll solver
+  with
+    Conflict _ ->
+      cancel_until level solver;
+      assume (Lit.neg lit) solver;
+      search_dpll solver
+
 let solve assumps solver =
   try
     List.iter (fun lit -> assume lit solver; propagate solver) assumps;
     solver.root_level <- decision_level solver;
-    search solver
+    search_dpll solver
   with
     Conflict _ -> raise UnSAT

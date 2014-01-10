@@ -14,4 +14,4 @@ I've created through the infomation science special seminar II of Tsukuba Univer
 
 ## Reference
 
-- "An Extensible SAT-solvers" (http://minisat.se/Papers.html)
+- "An Extensible SAT-solver" (http://minisat.se/Papers.html)

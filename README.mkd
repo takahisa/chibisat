@@ -1,15 +1,11 @@
 Chibisat
 ====
-## About
 
-Chibisat is a CDCL based SAT solver written by OCaml.
-
-I've created through the infomation science special seminar II of Tsukuba University this solver.
+Chibisat is a small CDCL based SAT solver written in OCaml.
 
 ## Requirements
 
 - OCaml >=4.0.1
-- OMake
 - OUnit
 
 ## Reference

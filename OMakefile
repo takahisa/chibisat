@@ -34,3 +34,7 @@ NATIVE_ENABLED = $(OCAMLOPT_EXISTS)
 
 .PHONY: build install clean
 .SUBDIRS: src test
+
+clean:
+	rm -f *~ *.omc *.omakedb *.omakedb.lock
+

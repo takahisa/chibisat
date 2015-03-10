@@ -8,7 +8,7 @@ This software is the result of Special Exercise in Information Science II (æƒ…å 
 
 ## How to Build
 
-install [OPAM](https://opam.ocaml.org/) into your system, and run the following commands.
+Install [OPAM](https://opam.ocaml.org/) into your system, and run the following commands.
 ```
   opam switch 4.01.0 # require 4.01.0 or later
   opam install ounit omake
@@ -18,7 +18,7 @@ install [OPAM](https://opam.ocaml.org/) into your system, and run the following 
 
 ## Usage
 ```
-  chibiml [options] <file.cnf>
+  ./chibiml [options] input.cnf
 ```
   
 ## Reference
@@ -27,4 +27,4 @@ install [OPAM](https://opam.ocaml.org/) into your system, and run the following 
 
 ## License
 
-Chibisat is released under the [MIT LICENSE](https://raw.githubusercontent.com/linerlock/chibisat/master/LICENSE)
+Chibisat is released under the [MIT LICENSE](https://raw.githubusercontent.com/linerlock/chibisat/master/LICENSE.txt)

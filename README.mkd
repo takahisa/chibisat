@@ -1,13 +1,30 @@
 Chibisat
 ====
 
-Chibisat is a small CDCL based SAT solver written in OCaml.
+## About
 
-## Requirements
+Chibisat is a small CDCL (Conflict-Driven Clause Learning) based SAT solver written in OCaml.
+This software is the result of Special Exercise in Information Science II (情報特別演習II).
 
-- OCaml >=4.0.1
-- OUnit
+## How to Build
 
+install [OPAM](https://opam.ocaml.org/) into your system, and run the following commands.
+```
+  opam switch 4.01.0 # require 4.01.0 or later
+  opam install ounit omake
+  opam install menhir # optional
+  omake
+```
+
+## Usage
+```
+  chibiml [options] <file.cnf>
+```
+  
 ## Reference
 
 - "An Extensible SAT-solver" (http://minisat.se/Papers.html)
+
+## License
+
+Chibisat is released under the [MIT LICENSE](https://raw.githubusercontent.com/linerlock/chibisat/master/LICENSE)

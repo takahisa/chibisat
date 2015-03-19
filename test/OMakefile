@@ -1,5 +1,5 @@
-# 
-# Copyright (c) 2013 Takahisa Watanabe <linerlock@outlook.com> All rights reserved.
+ # 
+# Copyright (c) 2015 Takahisa Watanabe <linerlock@outlook.com> All rights reserved.
 # 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,41 +20,49 @@
 # THE SOFTWARE.
 # 
 
-.PHONY: build clean check
-PROGRAM = chibisat_test
-SRC_DIR = .
-
-USE_OCAMLFIND = true
-OCAMLPACKS[] =
-  oUnit
-OCAMLFLAGS    += -thread -g -annot
-OCAMLCFLAGS   +=
-OCAMLOPTFLAGS +=
-OCAML_LINK_FLAGS +=
-OCAML_BYTE_LINK_FLAGS +=
-OCAML_NATIVE_LINK_FLAGS +=
-
 if $(not $(OCAMLFIND_EXISTS))
   eprintln(You need to install ocamlfind and run "omake --configure")
   exit 1
 
-FILES[] = $(removesuffix $(filter %.ml, $(ls R, $(SRC_DIR))))
+PROGRAM = chibisat_test
+MAIN    = main
 
-OCAML_LIBS += ../src/chibisat
-OCAML_CLIBS +=
-OCAML_OTHER_LIBS +=
-OCAML_LIB_FLAGS +=
-OCAMLINCLUDES += ../src
+SOURCE_ROOT_DIRECTORY = .
+
+USE_OCAMLFIND  = true
+BYTE_ENABLED   = not $(OCAMLOPT_EXISTS)
+NATIVE_ENABLED = $(OCAMLOPT_EXISTS)
 
 
+OCAMLPACKS[] =
+  oUnit
+
+OCAMLFLAGS              +=
+OCAMLCFLAGS             +=
+OCAMLOPTFLAGS           +=
+OCAML_LINK_FLAGS        +=
+OCAML_BYTE_LINK_FLAGS   +=
+OCAML_NATIVE_LINK_FLAGS +=
+OCAML_LIBS              += ../chibisat
+OCAML_CLIBS             +=
+OCAML_OTHER_LIBS        +=
+OCAML_LIB_FLAGS         +=
+OCAMLINCLUDES           += ../
+
+FILES[] =
+
+OCAML_GENERATED_FILES[] =
+FILES += $(removesuffix $(OCAML_GENERATED_FILES))
+FILES += $(removesuffix $(filter %.ml, $(ls $(SOURCE_ROOT_DIRECTORY))))
+
+.PHONY: check build clean
 .DEFAULT: build
+
+check: build
+    ./$(PROGRAM)
 
 build: $(OCamlProgram $(PROGRAM), $(FILES))
 
-check: build
-       ./$(PROGRAM)
-
-clean:
-  rm -rf *.cmx *.cmxa *.cmo *.cmi *.a *.o *.out *.run *~ *.annot
-  rm -f $(PROGRAM)
-  rm -f $(PROGRAM).opt
+clean: 
+    $(RM) *.cmx *.cmxa *.cmo *.cmi *.o *.cma *.a *.run *.annot *.out *.cache *~ \
+        $(PROGRAM) $(PROGRAM).opt $(OCAML_GENERATED_FILES)
